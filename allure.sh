@@ -1,1 +1,2 @@
-allure serve target/surefire-reports
+#!/bin/sh
+allure serve allure-results

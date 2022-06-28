@@ -24,43 +24,43 @@ import io.qameta.allure.Step;
 public class OpenBrowserTest {
 	
 	final Logger logger = LoggerFactory.getLogger(OpenBrowserTest.class);
+	public String url = "https://demoqa.com/automation-practice-form";
 
     private WebDriver driver;
 
     @BeforeEach
-	@Description("Initiate New Chrome Driver")
-	@Feature("Feature - New Chrome Driver")
 	public void setup() {
         driver = new ChromeDriver();
     }
 
 	@AfterEach
-	@Description("Quit Chrome Driver")
-	@Feature("Feature - Quit Chrome Driver")
     public void teardown() {
         driver.quit();
     }
 
 	@Test
-    @Description("Checking the title of the loaded page.")
-	@Feature("Feature - Daoing website search")
-	@Link("https://demoqa.com")
 	@Severity(SeverityLevel.NORMAL)
-	@Story("Base support for bdd annotations")
-    @Story("Advanced support for bdd annotations")
-	@Step("Step - Launch Browser")
+    @Description("Test Case Declaration : Checking the title of the loaded page.")
+	@Story("Story Name : Open page")
+	@Feature("Feature : Doing website search")
+	@Link("https://demoqa.com")
 	public void testOpenBrowser() throws InterruptedException {
-
-		// Exercise
-        String sutUrl = "https://demoqa.com/automation-practice-form";
-        driver.get(sutUrl);
-        String title = driver.getTitle();
-        logger.info("The title of {} is {}", sutUrl, title);
-        System.out.println("Page Loaded");
+        
+		getUrl();
+		logger.info("The title of {} is {}", url, getTitle());
 
         // Verify
-        assertThat(title).isEqualTo("ToolsQA");
-		driver.quit();
+        assertThat(getTitle()).isEqualTo("ToolsQA");
     }
+
+	@Step("get url")
+	public void getUrl(){
+		driver.get(url);
+	}
+
+	@Step("get Title")
+	public String getTitle(){
+		return driver.getTitle();
+	}
 
 }
